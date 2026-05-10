@@ -19,7 +19,7 @@ run steps.
 EventApp is a cross-platform mobile app built with React Native + Expo that helps users 
 discover and track local events. Users can browse nearby events with real-time distance 
 calculations, view full event details, bookmark favourites, and navigate to venues via 
-native Maps integrationß. Built with production-minded MVP in mind to demonstrating clean 
+native Maps integration. Built with production-minded MVP in mind to demonstrating clean 
 architecture, local persistence, API caching, and native platform features.
 
 ## Architecture
@@ -105,11 +105,12 @@ sequenceDiagram
 ## Setup & Run
 Prerequisites: Node.js 18 or above, Expo Go app on device
 
-git clone <repo-link>
-cd eventapp
-npm install
+```
+git clone https://github.com/kazuninishiki/localeventapp-poc/ 
+cd localeventapp-poc 
+npm install 
 npx expo start
-
+```
 Scan QR code with:
 - iOS: Camera app
 - Android: Expo Go app
@@ -128,7 +129,7 @@ npx jest (--verbose)
 - Location permission request with fallback handling
 
 ## Trade-offs & Decisions
-"Used mock JSON over real API: requirements explicitly support mock data as valid approach. Real API swap requires only eventsService.ts change — service layer decoupled for this reason (intended)"
+- Used mock JSON over real API: requirements explicitly support mock data as valid approach. Real API swap requires only eventsService.ts change — service layer decoupled for this reason (intended)
 - Deep link to Maps over embedded SDK: zero dependency, no API key, native UX, reduces bundle size - trade off - switches to another native app (Google Maps/Apple Maps)
 - Haversine implemented from scratch: demonstrates algorithm understanding, no external dependency
 - SQLite for bookmarks only: bookmarks are user-local, no sync needed, TTL unnecessary, can easily be implemented
