@@ -10,7 +10,7 @@ interface EventCardProps {
   startTime: string
   venueName: string
   imageUrl: string
-  distance: number
+  distance: string
   onPress: () => void
   
 }

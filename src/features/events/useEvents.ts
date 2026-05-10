@@ -8,7 +8,7 @@ export const useEvents = () => {
     })
 }
 
-export const useEventsById = (id: string) => {
+export const useEventById = (id: string) => {
     return useQuery ({
         queryKey: ['events', id],
         queryFn: () => fetchEventById(id),

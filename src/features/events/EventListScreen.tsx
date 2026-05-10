@@ -1,11 +1,28 @@
 import { View, Text, FlatList, ActivityIndicator } from 'react-native'
-import React from 'react'
-import { useEvents } from './useEvents'
+import React, { useState, useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+import { RootStackParamList } from '../../types/navigation'
+
 import EventCard from '../../components/EventCard'
+import { useEvents } from './useEvents'
+
+import { getUserLocation, UserLocation } from '../../lib/location'
+import { getDistance, formatDistance } from '../../lib/haversine'
+
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'EventList'>
 
 const EventListScreen = () => {
+    const navigation = useNavigation<NavigationProp> ()
+    const [userLocation, setUserLocation] = useState<UserLocation | null>(null)
+
     const { data, isLoading, isError } = useEvents() 
-   if (isLoading) return (
+    useEffect(() => {
+        getUserLocation().then(setUserLocation)
+    }, [])
+    if (isLoading) return (
         <View className="flex-1 justify-center items-center">
         <ActivityIndicator size="large" />
         </View>
@@ -28,8 +45,17 @@ const EventListScreen = () => {
                 startTime={item.time.startTime}
                 venueName={item.location.venueName}
                 imageUrl={item.imageUrl}
-                distance={0}
-                onPress={() => {}}
+                distance={userLocation ? 
+                    formatDistance(
+                        getDistance(
+                            userLocation.latitude, 
+                            userLocation.longitude, 
+                            item.location.latitude, 
+                            item.location.longitude)
+                        )
+                    : '...'
+                }
+                onPress={() => navigation.navigate('EventDetail', { id: item.id })}
             />
             )}
         />
