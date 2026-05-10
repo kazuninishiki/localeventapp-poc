@@ -35,7 +35,7 @@ const BookMarksScreen = () => {
                 id={item.id}
                 title={item.title}
                 category={item.category}
-                startTime={formatDateTime(item.time.startTime)}
+                startTime={formatDateTime(item.time.startTime ?? '')}
                 venueName={item.location.venueName}
                 imageUrl={item.imageUrl}
                 distance={userLocation ? 
