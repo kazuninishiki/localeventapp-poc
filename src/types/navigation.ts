@@ -7,3 +7,8 @@ export type TabParamList = {
   Events: undefined
   Bookmarks: undefined
 }
+
+export type BookmarksStackParamList = {
+  BookmarkList: undefined
+  EventDetail: { id: string }
+}

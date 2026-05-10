@@ -5,6 +5,10 @@ import { useEventById } from './useEvents'
 import { RootStackParamList } from '../../types/navigation'
 import { formatDateTime } from '../../lib/formatDate'
 import { useBookmarkStore } from '../bookmarks/bookmarkStore'
+import { Platform } from 'react-native'
+
+// replace current Linking.openURL line:
+
 
 
 const EventDetailScreen = ( ) => {
@@ -38,7 +42,18 @@ const EventDetailScreen = ( ) => {
             <Text className='text-sm text-gray-700 mt-1'>🗒️ {data?.description}</Text>
             <TouchableOpacity
               className='bg-blue-600 rounded-xl p-4 mt-6'
-              onPress={() => Linking.openURL(`maps://?ll=${data?.location.latitude},${data?.location.longitude}`)}
+              onPress={() => {
+                const lat = data?.location.latitude
+                const lng = data?.location.longitude
+                const label = data?.location.venueName
+                
+                const url = Platform.select({
+                  ios: `maps://?ll=${lat},${lng}&q=${label}`,
+                  android: `geo:${lat},${lng}?q=${lat},${lng}(${label})`,
+                  default: `https://maps.google.com/?q=${lat},${lng}`
+                }) 
+                if (url) Linking.openURL(url)
+              }}
             ><Text className='text-center text-xl text-white mt-1'>📍 Open Maps</Text>
             </TouchableOpacity>
 

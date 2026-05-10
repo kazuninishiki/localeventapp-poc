@@ -40,3 +40,23 @@ imrn import from react-native
 SafeAreaView = important on iOS:
 without it → content renders behind notch/status bar
 with it    → content starts below notch automatically
+
+about background refresh:
+
+user closes app
+→ iOS wakes app every ~15min in background
+→ backgroundFetch.ts runs
+→ fetches fresh events from API
+→ user reopens app → sees updated events, not stale cache
+
+too frequent = drains battery → iOS kills it anyway
+15min minimum = iOS enforced floor, can't go lower
+
+--
+
+real app  → actually fetch API, update SQLite cache
+our app   → log "background fetch ran" → demonstrates pattern
+
+jest-expo for unit tests (3)
+
+npx jest --verbose

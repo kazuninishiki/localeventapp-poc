@@ -14,12 +14,7 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { formatDateTime } from '../../lib/formatDate'
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'EventList'>
-
-
-
-
-
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>
 
 const BookMarksScreen = () => {
   const { data } = useEvents()
