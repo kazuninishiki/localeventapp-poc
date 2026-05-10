@@ -33,8 +33,8 @@ const EventDetailScreen = ( ) => {
         <ScrollView className='flex-1 bg-white'>
           <Image source={{ uri: data?.imageUrl }} style={{ width: '100%', height: 200}} />
           <View className='p-4'>
-            <Text className='text-2xl font-bold text-gray-900'>{data?.title}</Text>
-            <Text className='text-sm text-blue-500 mt-1'>𑗏 {data?.category}</Text>
+            <Text className='text-2xl font-bold text-gray-900' style={{ marginBottom: 8, lineHeight: 34 }}>{data?.title}</Text>
+            <Text className='text-sm text-blue-500'>🏷️ {data?.category}</Text>
             <Text className='text-sm text-gray-500 mt-1'>🗓️ {formatDateTime(data?.time.startTime ?? '')} - {formatDateTime(data?.time.endTime ?? '')}</Text>
             <Text className='text-sm text-gray-500 mt-1'>🏢 {data?.location.venueName}</Text>
             <Text className='text-sm text-gray-500 mt-1'>📍 {data?.location.venueAddress}</Text>
